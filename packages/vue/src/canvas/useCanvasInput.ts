@@ -219,7 +219,7 @@ export function useCanvasInput(
       return
     }
     if (d.type === 'resize') {
-      applyResize(d, cx, cy, e.shiftKey, editor)
+      applyResize(d, cx, cy, e.shiftKey, e.metaKey || e.ctrlKey, editor)
       return
     }
 

@@ -30,9 +30,37 @@ export function applyResize(
   cx: number,
   cy: number,
   constrain: boolean,
+  _scale: boolean,
   editor: Editor
 ) {
-  editor.graph.updateNodePreview(d.nodeId, resizeChanges(d, cx, cy, constrain))
+  const changes = resizeChanges(d, cx, cy, constrain)
+  editor.graph.updateNodePreview(d.nodeId, changes)
+
+  if (d.origChildren && d.origRect.width > 0 && d.origRect.height > 0) {
+    const sx = changes.width! / d.origRect.width
+    const sy = changes.height! / d.origRect.height
+    for (const [childId, orig] of d.origChildren) {
+      const childChanges: Partial<SceneNode> = {
+        x: Math.round(orig.x * sx),
+        y: Math.round(orig.y * sy),
+        width: Math.round(Math.max(1, orig.width * sx)),
+        height: Math.round(Math.max(1, orig.height * sy))
+      }
+      if (orig.vectorNetwork) {
+        const scaledVN = scaleVectorNetworkForResize(
+          orig.vectorNetwork,
+          orig.width,
+          orig.height,
+          childChanges.width!,
+          childChanges.height!
+        )
+        if (scaledVN) childChanges.vectorNetwork = scaledVN
+      }
+      editor.graph.updateNodePreview(childId, childChanges)
+      editor.renderer?.invalidateVectorPath(childId)
+    }
+  }
+
   const node = editor.graph.getNode(d.nodeId)
   if (node?.layoutMode !== 'NONE') {
     editor.graph.runPreviewUpdates(() => computeLayout(editor.graph, d.nodeId))
@@ -50,7 +78,34 @@ export function commitResizePreview(d: DragResize, editor: Editor) {
     height: node.height
   }
   if (node.vectorNetwork) finalChanges.vectorNetwork = node.vectorNetwork
-  editor.graph.updateNodePreview(d.nodeId, d.origRect)
-  editor.updateNode(d.nodeId, finalChanges)
-  editor.commitResize(d.nodeId, d.origRect)
+
+  if (d.origChildren) {
+    const finalChildren = new Map<string, Partial<SceneNode>>()
+    for (const [childId] of d.origChildren) {
+      const child = editor.graph.getNode(childId)
+      if (!child) continue
+      const final: Partial<SceneNode> = {
+        x: child.x,
+        y: child.y,
+        width: child.width,
+        height: child.height
+      }
+      if (child.vectorNetwork) final.vectorNetwork = child.vectorNetwork
+      finalChildren.set(childId, final)
+    }
+    editor.graph.updateNodePreview(d.nodeId, d.origRect)
+    for (const [childId, orig] of d.origChildren) {
+      editor.graph.updateNodePreview(childId, orig)
+    }
+    editor.updateNode(d.nodeId, finalChanges)
+    for (const [childId, final] of finalChildren) {
+      editor.updateNode(childId, final)
+    }
+    editor.commitGroupResize(d.nodeId, d.origRect, d.origChildren)
+    editor.requestRepaint()
+  } else {
+    editor.graph.updateNodePreview(d.nodeId, d.origRect)
+    editor.updateNode(d.nodeId, finalChanges)
+    editor.commitResize(d.nodeId, d.origRect)
+  }
 }
