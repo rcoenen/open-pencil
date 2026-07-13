@@ -1,6 +1,6 @@
 import type { SceneNode } from '@open-pencil/scene-graph'
 
-import { weightToStyle } from '#core/text/fonts'
+import { fontManager, weightToStyle } from '#core/text/fonts'
 import { hasGlyphOutlines } from '#core/text/opentype'
 
 import {
@@ -43,6 +43,18 @@ export function createTextActions(ctx: EditorContext) {
       te.start(node)
     }
     ctx.requestRender()
+
+    // Derived Figma outlines look correct without CanvasKit faces. Live edit drops those
+    // outlines and paints via Paragraph — ensure faces are on the active provider first.
+    void fontManager.ensureTextNodeFonts(node, ctx.getRenderer()).then(() => {
+      if (ctx.state.editingTextId !== nodeId) return
+      const latest = ctx.graph.getNode(nodeId)
+      const editor = ctx.getTextEditor()
+      if (!latest || !editor?.isActive || editor.nodeId !== nodeId) return
+      editor.setRenderer(ctx.getRenderer())
+      editor.rebuildParagraph(latest)
+      ctx.requestRender()
+    })
   }
 
   function commitTextEdit() {
