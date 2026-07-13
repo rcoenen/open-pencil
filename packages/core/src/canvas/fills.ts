@@ -21,12 +21,13 @@ export function paintFills(
   fills: readonly Fill[],
   node: SceneNode,
   graph: SceneGraph,
-  draw: (fill: Fill) => void
+  draw: (fill: Fill) => void,
+  patternStack?: Set<string>
 ): void {
   for (let fi = 0; fi < fills.length; fi++) {
     const fill = fills[fi]
     if (!fill.visible) continue
-    if (!r.applyFill(fill, node, graph, fi)) continue
+    if (!r.applyFill(fill, node, graph, fi, patternStack)) continue
     r.fillPaint.setAlphaf(fill.opacity)
     r.fillPaint.setBlendMode(figmaBlendModeToSkia(r.ck, fill.blendMode))
     draw(fill)
@@ -43,7 +44,8 @@ export function drawVectorMultiStyleFills(
   r: SkiaRenderer,
   canvas: Canvas,
   node: SceneNode,
-  graph: SceneGraph
+  graph: SceneGraph,
+  patternStack?: Set<string>
 ): boolean {
   if (node.type !== 'VECTOR' || node.fillGeometry.length === 0) return false
   if (!hasPathLevelFills(node)) return false
@@ -55,7 +57,7 @@ export function drawVectorMultiStyleFills(
     const g = node.fillGeometry[i]
     const path = paths[i]
     const fills = g.fills && g.fills.length > 0 ? g.fills : node.fills
-    paintFills(r, fills, node, graph, () => canvas.drawPath(path, r.fillPaint))
+    paintFills(r, fills, node, graph, () => canvas.drawPath(path, r.fillPaint), patternStack)
   }
   return true
 }
