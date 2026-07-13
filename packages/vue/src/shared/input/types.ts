@@ -1,5 +1,11 @@
 import type { Tool } from '@open-pencil/core/editor'
-import type { GeometryPath, NodeType, VectorNetwork } from '@open-pencil/scene-graph'
+import type {
+  FigmaDerivedTextGlyph,
+  GeometryPath,
+  NodeType,
+  Stroke,
+  VectorNetwork
+} from '@open-pencil/scene-graph'
 import type { Rect, Vector } from '@open-pencil/scene-graph/primitives'
 
 export type HandlePosition = 'nw' | 'n' | 'ne' | 'e' | 'se' | 's' | 'sw' | 'w'
@@ -37,6 +43,7 @@ export interface DragPan {
   startPanY: number
 }
 
+/** Snapshot at drag start so live resize can re-scale from a fixed origin. */
 export interface OrigChildState {
   x: number
   y: number
@@ -44,6 +51,11 @@ export interface OrigChildState {
   height: number
   vectorNetwork: VectorNetwork | null
   fillGeometry: GeometryPath[]
+  /** Path-text OUTSIDE outlines / vector stroke blobs — must scale with the node. */
+  strokeGeometry: GeometryPath[]
+  figmaDerivedTextGlyphs: FigmaDerivedTextGlyph[] | null
+  strokes: Stroke[]
+  textPathBox: Rect | null
 }
 
 export interface DragResize {
@@ -55,6 +67,11 @@ export interface DragResize {
   nodeId: string
   origVectorNetwork: VectorNetwork | null
   origFillGeometry: GeometryPath[]
+  /** See OrigChildState.strokeGeometry — root node counterpart. */
+  origStrokeGeometry: GeometryPath[]
+  origFigmaDerivedTextGlyphs: FigmaDerivedTextGlyph[] | null
+  origStrokes: Stroke[]
+  origTextPathBox: Rect | null
   origChildren: Map<string, OrigChildState> | null
 }
 

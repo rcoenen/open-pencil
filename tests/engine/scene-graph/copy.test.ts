@@ -7,7 +7,8 @@ import {
   copyStroke,
   copyEffect,
   copyStyleRun,
-  copyGeometryPaths
+  copyGeometryPaths,
+  scaleGeometryPaths
 } from '@open-pencil/scene-graph/copy'
 
 import { expectDefined } from '#tests/helpers/assert'
@@ -98,9 +99,9 @@ describe('copy helpers — mutation isolation', () => {
     expect(original[0].commandsBlob[0]).toBe(1)
   })
 
-  test('copyGeometryPaths: keeps path-level styleID and fills (multi-color vectors)', () => {
-    // Clone, instance sync, and identity constraint scale use this helper.
-    // Dropping fills collapses multi-color vectors to a single node paint.
+  test('copyGeometryPaths and scaleGeometryPaths keep path-level styleID/fills', () => {
+    // Resize snapshots / clone / constraint scale use these helpers; dropping
+    // fills collapses multi-color vectors to a single node fill (gray blob).
     const orange: Fill = {
       type: 'SOLID',
       color: { r: 1, g: 0.32, b: 0, a: 1 },
@@ -110,19 +111,25 @@ describe('copy helpers — mutation isolation', () => {
     const original: GeometryPath[] = [
       {
         windingRule: 'NONZERO',
-        commandsBlob: new Uint8Array([1, 2, 3]),
+        commandsBlob: new Uint8Array([1, 0, 0, 0, 0, 0, 0, 0, 0]),
         styleID: 5,
         fills: [orange]
       },
-      { windingRule: 'EVENODD', commandsBlob: new Uint8Array([4, 5, 6]) }
+      { windingRule: 'EVENODD', commandsBlob: new Uint8Array([2, 3, 4]) }
     ]
-    const copy = copyGeometryPaths(original)
-    expect(copy[0]?.styleID).toBe(5)
-    expect(copy[0]?.fills?.[0]?.color.r).toBeCloseTo(1, 2)
-    expect(copy[1]?.styleID).toBeUndefined()
-    expect(copy[1]?.fills).toBeUndefined()
-    expectDefined(copy[0]?.fills?.[0], 'copied path fill').color.r = 0
+
+    const copied = copyGeometryPaths(original)
+    expect(copied[0]?.styleID).toBe(5)
+    expect(copied[0]?.fills?.[0]?.color.r).toBeCloseTo(1, 2)
+    expect(copied[1]?.styleID).toBeUndefined()
+    expect(copied[1]?.fills).toBeUndefined()
+    expectDefined(copied[0]?.fills?.[0], 'copied path fill').color.r = 0
     expect(original[0]?.fills?.[0]?.color.r).toBe(1)
+
+    const scaled = scaleGeometryPaths(original, 0.5, 0.5)
+    expect(scaled[0]?.styleID).toBe(5)
+    expect(scaled[0]?.fills?.[0]?.color.g).toBeCloseTo(0.32, 2)
+    expect(scaled[0]?.commandsBlob).not.toBe(original[0]?.commandsBlob)
   })
 
   test('copyFills: array independence', () => {
