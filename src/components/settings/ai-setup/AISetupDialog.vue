@@ -19,6 +19,12 @@ function openAdvancedSettings(): void {
   openSettingsDialog('ai')
 }
 
+/** Service setup lists every service and what is left to set up. */
+function openServiceSetup(): void {
+  closeAISetup()
+  openSettingsDialog('setup')
+}
+
 /** The tour opens in a tab of its own; AI stays one click away in Settings. */
 function takeTour(): void {
   closeAISetup()
@@ -40,6 +46,7 @@ function takeTour(): void {
       @close="closeAISetup"
       @advanced="openAdvancedSettings"
       @tour="takeTour"
+      @services="openServiceSetup"
     />
   </AppDialogRoot>
 </template>
