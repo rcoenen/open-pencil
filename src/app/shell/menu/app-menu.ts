@@ -20,6 +20,7 @@ import type { BuiltinIOFormatId } from '@open-pencil/core/io'
 import type { CommandPaletteGroup, CommandPaletteItem, MenuEntry } from '@open-pencil/vue'
 import { shortcutPlatform, useEditorCommands, useI18n } from '@open-pencil/vue'
 
+import { openAISetup } from '@/app/ai/models/settings/onboarding/dialog'
 import { openTour } from '@/app/demo/document'
 import { useEditorStore } from '@/app/editor/active-store'
 import { openVariablesDialog } from '@/app/editor/tokens/dialog'
@@ -105,6 +106,7 @@ export function useAppMenu() {
     open: 'open',
     'open-storage-workspace': 'openStorageWorkspace',
     'open-tour': 'openTour',
+    'show-welcome': 'showWelcome',
     save: 'save',
     'save-as': 'saveAs',
     'save-to-storage': 'saveToStorage',
@@ -175,6 +177,7 @@ export function useAppMenu() {
     'open-tour': () => {
       openTour().catch((error: unknown) => console.error('[Tour] Could not open the tour:', error))
     },
+    'show-welcome': () => openAISetup('welcome'),
     save: () => void store.saveFigFile(),
     'save-as': () => void store.saveFigFileAs(),
     'save-to-storage': () => void saveDocumentToStorage(store),
