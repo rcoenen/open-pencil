@@ -49,16 +49,12 @@ const mainMenuCls = useMenuUI({ content: 'min-w-52' })
         class="size-6"
       />
       <DropdownMenuRoot v-else>
+        <!-- Like Figma's, the button shows the mark as a single-color outline, so it reads as a control. -->
         <DropdownMenuTrigger
           :aria-label="t.mainMenu"
-          class="-m-0.5 flex shrink-0 cursor-pointer items-center rounded p-0.5 outline-none hover:bg-hover focus-visible:ring-2 focus-visible:ring-accent/40 data-[state=open]:bg-hover"
+          class="flex size-7 shrink-0 cursor-pointer items-center justify-center rounded text-muted outline-none hover:bg-hover hover:text-surface focus-visible:ring-2 focus-visible:ring-accent/40 data-[state=open]:bg-hover data-[state=open]:text-surface"
         >
-          <BrandMark
-            data-test-id="app-logo"
-            variant="app-icon"
-            :appearance="resolvedAppTheme"
-            class="size-6"
-          />
+          <icon-brand-mark-outline class="size-5" />
         </DropdownMenuTrigger>
         <DropdownMenuPortal>
           <!-- Focus stays where the chosen action put it, such as a dialog it opened. -->

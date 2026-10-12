@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="28 28 228 228" fill="none" stroke="currentColor" stroke-width="16" stroke-linejoin="round">
+  <mask id="mark-outline-handles" maskUnits="userSpaceOnUse" x="28" y="28" width="228" height="228">
+    <rect x="28" y="28" width="228" height="228" fill="#FFFFFF" stroke="none"/>
+    <path d="M54 30H98V74H54Z" fill="#000000" stroke="none"/>
+    <path d="M235 118A27 27 0 1 1 181 118A27 27 0 1 1 235 118Z" fill="#000000" stroke="none"/>
+  </mask>
+  <path data-part="body" mask="url(#mark-outline-handles)" d="M76 52H144C186 52 208 80 208 118S186 184 144 184H116V222L96 248L76 222ZM116 92V144H140C157 144 168 134 168 118S157 92 140 92Z"/>
+  <path data-part="handle" d="M54 30H98V74H54Z"/>
+  <path data-part="handle" d="M235 118A27 27 0 1 1 181 118A27 27 0 1 1 235 118Z"/>
+</svg>

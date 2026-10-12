@@ -5,28 +5,34 @@ import { CanvasHelper } from '#tests/helpers/canvas'
 for (const deviceScaleFactor of [1, 2]) {
   test.describe(`brand at ${deviceScaleFactor}x`, () => {
     test.use({ deviceScaleFactor })
-    test('the editor keeps its 24px ivory tile in both app themes', async ({ page }) => {
+    test('the main menu button shows the outlined mark in both app themes', async ({ page }) => {
       await page.goto('/?test')
       await new CanvasHelper(page).waitForInit()
-      const logo = page.getByTestId('app-logo')
-      await expect(logo).toHaveAttribute('alt', 'OpenPencil')
+      // The browser header shows the mark as an icon-colored outline, as Figma's main menu does;
+      // the ivory tile stays for the app icon, the favicon, and the desktop header.
+      const button = page.getByRole('button', { name: 'Main menu', exact: true })
+      const mark = button.locator('svg')
+      await expect(mark).toHaveCount(1)
+      await expect(mark).toHaveCSS('width', '20px')
       for (const appearance of ['light', 'dark'] as const) {
         await page.evaluate(async (appearance) => {
           const path = '/src/app/shell/theme.ts'
           const module = await import(path)
           module.useAppTheme().setTheme(appearance)
         }, appearance)
-        await expect(logo).toHaveAttribute('src', '/brand/app-icon.svg')
-        await expect(logo).toHaveCSS('width', '24px')
-        await expect(logo).toHaveCSS('height', '24px')
-        await expect(logo).toHaveScreenshot(
-          `brand-header-${appearance}-${deviceScaleFactor}x.png`,
-          {
-            maxDiffPixels: 0,
-            threshold: 0.1,
-            scale: 'device'
+        const colors = await page.evaluate(() => {
+          const root = getComputedStyle(document.documentElement)
+          const probe = document.createElement('span')
+          document.body.append(probe)
+          const resolve = (value: string) => {
+            probe.style.color = value
+            return getComputedStyle(probe).color
           }
-        )
+          const muted = resolve(root.getPropertyValue('--color-muted'))
+          probe.remove()
+          return { muted }
+        })
+        await expect(mark).toHaveCSS('color', colors.muted)
       }
     })
 
