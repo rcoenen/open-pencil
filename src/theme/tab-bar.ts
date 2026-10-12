@@ -1,6 +1,9 @@
 const tabBarTheme = {
   slots: {
     root: 'flex h-9 shrink-0 items-end border-b border-border bg-canvas',
+    // Figma desktop's home button: the start page, fixed at the start of the bar and never a tab.
+    home: 'flex h-full w-10 shrink-0 cursor-pointer touch-manipulation items-center justify-center border-r border-border transition-colors outline-none focus-visible:ring-1 focus-visible:ring-panel-focus',
+    homeIcon: 'size-4',
     // Sized by its tabs until the bar runs out of room; then it scrolls and fades the clipped side.
     scroller:
       'scrollbar-none h-full min-w-0 scroll-px-8 overflow-x-auto data-overflow-end:mask-r-from-[calc(100%-2rem)] data-overflow-start:mask-l-from-[calc(100%-2rem)]',
@@ -26,11 +29,13 @@ const tabBarTheme = {
       true: {
         item: 'bg-panel text-surface',
         trigger: 'bg-panel text-surface',
+        home: 'bg-panel text-surface',
         close: 'opacity-100'
       },
       false: {
         item: 'text-muted hover:text-surface',
         trigger: 'text-muted hover:text-surface',
+        home: 'text-muted hover:text-surface',
         close: 'opacity-0'
       }
     }
