@@ -1,0 +1,68 @@
+<script setup lang="ts">
+import { tv } from 'tailwind-variants'
+import { computed } from 'vue'
+import IconFile from '~icons/lucide/file'
+import IconShapes from '~icons/lucide/shapes'
+
+import { useI18n } from '@open-pencil/vue'
+
+import { openSettingsDialog } from '@/app/settings/dialog'
+import MainMenuButton from '@/components/shell/MainMenuButton.vue'
+import Tip from '@/components/ui/overlay/Tip.vue'
+import navigationRailTheme from '@/theme/shell/navigation-rail'
+
+export type LeftPanelView = 'file' | 'assets'
+
+/** Figma's navigation bar: the main menu, the left panel's views, and Settings at the foot. */
+const view = defineModel<LeftPanelView>({ required: true })
+
+const { menu, panels, settings } = useI18n()
+const railStyles = tv(navigationRailTheme)
+const base = railStyles()
+
+const views = computed(() => [
+  {
+    value: 'file' as const,
+    label: menu.value.file,
+    icon: IconFile,
+    testId: 'left-panel-layers-tab'
+  },
+  {
+    value: 'assets' as const,
+    label: panels.value.assets,
+    icon: IconShapes,
+    testId: 'left-panel-assets-tab'
+  }
+])
+</script>
+
+<template>
+  <nav :aria-label="menu.navigation" :class="base.root()">
+    <MainMenuButton />
+    <div :class="base.separator()" />
+    <Tip v-for="item in views" :key="item.value" as-child :label="item.label" side="right">
+      <button
+        type="button"
+        :data-test-id="item.testId"
+        :aria-label="item.label"
+        :aria-pressed="view === item.value"
+        :class="railStyles({ active: view === item.value }).item()"
+        @click="view = item.value"
+      >
+        <component :is="item.icon" :class="base.icon()" />
+      </button>
+    </Tip>
+    <div :class="base.spacer()" />
+    <Tip as-child :label="settings.title" side="right">
+      <button
+        type="button"
+        data-test-id="app-settings-trigger"
+        :aria-label="settings.title"
+        :class="base.item()"
+        @click="openSettingsDialog()"
+      >
+        <icon-lucide-settings :class="base.icon()" />
+      </button>
+    </Tip>
+  </nav>
+</template>
