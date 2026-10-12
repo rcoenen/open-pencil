@@ -204,7 +204,7 @@ function formattedDate(updatedAt: string): string {
 
 <template>
   <main
-    class="flex min-h-0 flex-1 flex-col overflow-x-hidden overflow-y-auto bg-app text-surface"
+    class="flex min-h-0 flex-1 flex-col overflow-x-hidden overflow-y-auto bg-panel text-surface"
     data-test-id="recent-files-home"
   >
     <section
