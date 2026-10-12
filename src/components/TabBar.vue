@@ -105,7 +105,7 @@ function onClose(e: MouseEvent, tabId: string) {
             :data-dirty="tab.isDirty || undefined"
           >
             <PreparationIndicator v-if="tab.isPreparing" :progress="tab.preparationProgress" />
-            <icon-lucide-file v-else :class="baseStyles.icon()" />
+            <icon-lucide-file v-else :class="tabBarStyles({ active: tab.isActive }).icon()" />
             <span :class="baseStyles.label()">{{ tab.name }}</span>
             <Tip v-if="tab.isDirty" :label="files.unsavedChanges" side="bottom">
               <span role="img" :aria-label="files.unsavedChanges" :class="baseStyles.dirtyDot()" />
