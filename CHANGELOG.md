@@ -13,7 +13,7 @@
 
 ### Changed
 
-- The welcome opens on each launch until AI is set up or you tick its new "Don't show this again" box. Closing it with Start designing or the close button hides it only until the next launch; before, any close hid it for good. File → Show Welcome opens it again at any time.
+- The welcome opens on each launch until AI is set up or you tick its new "Don't show this again" box. Closing it with Start designing or the close button hides it only until the next launch; before, any close hid it for good. File → Show Welcome opens it again at any time, and replaces File → Open the Tour, since the tour is one click away from the welcome.
 - Trackpads and mouse wheels pan and zoom the canvas as in Figma. A two-finger pan moves the canvas twice as far, up to 120 px per scroll event. A pinch zooms as far in the desktop app and Safari as in other browsers, where it zooms a little less than before. In the desktop app and Safari, a pinch over Preview's live controls or comment pins now zooms the canvas, where it did nothing. On Windows each mouse wheel notch pans 16 px instead of 100 px, and notches less than 50 ms apart pan up to 120 px each.
 
 ### Fixed

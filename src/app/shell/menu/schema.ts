@@ -78,7 +78,6 @@ export const APP_MENU_SCHEMA = [
       { id: 'open', label: 'Open…', shortcut: 'MOD+O' },
       { id: 'open-recent', label: 'Open Recent', target: 'native' },
       { id: 'open-storage-workspace', label: 'Open Storage Workspace…', handler: 'shell' },
-      { id: 'open-tour', label: 'Open the Tour', handler: 'shell' },
       { id: 'show-welcome', label: 'Show Welcome', handler: 'shell' },
       { type: 'separator' },
       { id: 'save', label: 'Save', shortcut: 'MOD+S' },

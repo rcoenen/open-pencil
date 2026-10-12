@@ -21,7 +21,6 @@ import type { CommandPaletteGroup, CommandPaletteItem, MenuEntry } from '@open-p
 import { shortcutPlatform, useEditorCommands, useI18n } from '@open-pencil/vue'
 
 import { openAISetup } from '@/app/ai/models/settings/onboarding/dialog'
-import { openTour } from '@/app/demo/document'
 import { useEditorStore } from '@/app/editor/active-store'
 import { openVariablesDialog } from '@/app/editor/tokens/dialog'
 import { openSettingsDialog } from '@/app/settings/dialog'
@@ -105,7 +104,6 @@ export function useAppMenu() {
     new: 'new',
     open: 'open',
     'open-storage-workspace': 'openStorageWorkspace',
-    'open-tour': 'openTour',
     'show-welcome': 'showWelcome',
     save: 'save',
     'save-as': 'saveAs',
@@ -174,9 +172,6 @@ export function useAppMenu() {
     },
     open: () => void openFileDialog(),
     'open-storage-workspace': () => openStorageWorkspace(router),
-    'open-tour': () => {
-      openTour().catch((error: unknown) => console.error('[Tour] Could not open the tour:', error))
-    },
     'show-welcome': () => openAISetup('welcome'),
     save: () => void store.saveFigFile(),
     'save-as': () => void store.saveFigFileAs(),
