@@ -1,13 +1,32 @@
 # OpenPencil brand sources
 
-- `mark.svg` is the teal pencil-P master: a long pointed stem, contrasting teal blocks, a faint clipped pixel grid, and white editing handles with blue borders (`#005CFF`). The square sits at the top-left; the circle sits on the outer curve.
-- `mark-micro.svg` renders at 16px and preserves the main P's geometry and proportions. Its square and circular handles are enlarged for small sizes, with the circle slightly larger than the square. It has no grid.
-- Both use the same tight `28 28 228 228` viewBox. Keep the P geometry aligned between masters; optical adjustments belong to the handles, not the letter's proportions.
-- `icons/mark-outline.svg` is the single-color outline of the micro master, drawn with `currentColor` on a 24px icon grid: the P traced as a line, with the square and circular handles outlined over it. The browser's main-menu button at the top of the navigation rail shows it in the text color, as Figma shows its logo; Vite serves `icons/` as the `brand` icon collection (`<icon-brand-mark-outline />`). Keep its geometry in step with the micro master.
-- Both use real transparent counters and no white outline. Preserve the `data-part` attributes used for derived dark and monochrome artwork.
-- Dark artwork has its own brighter teal palette, lighter blue borders, soft-white handle centers, and a subtler grid. Monochrome artwork omits the grid.
+Logo kit v3: a P built from five modules on a 2 × 3 grid of equal square cells, in flat colour.
 
-Edit these SVGs, not generated files. Platform backgrounds, padding, and dark colors live in `tools/generate/brand/src/config.ts`. The approved main colors are defined by the SVG artwork. The official app-icon variant puts the light-palette mark on an ivory (`#F5F5EF`) rounded tile that fills the image, with transparency only at the rounded corners. Native desktop assets retain their platform-specific outer margin. Desktop icons, any-purpose PWA icons, and larger in-app branding share this composition. The tile stays ivory in both themes; use `BrandMark` with `variant="app-icon"` for larger placements. The desktop editor header uses a 24px tile; the browser shows the outline mark as the navigation rail's main-menu button. Favicons use the same tile with the optical micro master inside, in both browser themes. Generated `brand/app-icon.svg` and `brand/app-icon-1024.png` are suitable for profile images. Apple Touch keeps an opaque square for platform rounding; maskable artwork stays opaque and inside the central 80%-diameter safe circle.
+- `mark.svg` is the colour mark. Every rounded corner uses the same radius, half a cell. The counter is a cut-out with one sharp corner, centred where the four top modules meet. The coral foot is the pencil.
+- `mark-micro.svg` is the same artwork at 16px, for favicons. The kit has no separate small drawing: below 24px it prefers the one-colour mark, which the generator derives.
+- Both draw the 200 × 300 mark centred on a square `0 0 300 300` canvas, so the generator can place them like any square artwork. Keep the two files' geometry identical.
+- Each module carries a `data-part` (`stem-top`, `bowl-top`, `stem-middle`, `bowl-bottom`, `foot`). The hidden `data-shape="silhouette"` path is the whole P as one shape: the one-colour variants draw it in place of the modules, whose shared edges would otherwise show seams.
+
+| Module       | `data-part`   | Name  | Hex       |
+| ------------ | ------------- | ----- | --------- |
+| Top left     | `stem-top`    | Blue  | `#1D46D6` |
+| Top right    | `bowl-top`    | Azure | `#4DA3FF` |
+| Middle left  | `stem-middle` | Teal  | `#0B8A84` |
+| Middle right | `bowl-bottom` | Mint  | `#3EDBB0` |
+| Foot         | `foot`        | Coral | `#FF6B3D` |
+| One colour   | —             | Ink   | `#111111` |
+
+Each row is a dark-to-light pair, the hue walks from blue to teal down the mark, and coral is the only warm colour. Flat colour only: no gradients, shadows, or outlines on the colour mark.
+
+## Backgrounds and tiles
+
+The colour mark sits bare on white, black, and neutral greys, so the dark variants keep its colours. On colour or busy backgrounds, use the white tile or the one-colour mark, and never place the bare colour mark on one of its module colours. The one-colour mark is ink on light backgrounds and white on dark ones.
+
+The app icon is the colour mark on a white rounded tile, holding the mark at 76% of the tile's height. The same tile is the favicon in both browser themes, the any-purpose PWA icon, the profile image, and the editor header's 24px mark. Native desktop icons keep their platform-specific outer margin with the mark at the same share of the tile. Apple Touch keeps an opaque square for platform rounding; maskable artwork stays opaque and inside the central 80%-diameter safe circle.
+
+Minimum sizes: the colour mark 24px tall; the one-colour mark 16px. Keep half a module, a quarter of the mark's width, clear on every side.
+
+Edit these SVGs, not generated files. Platform backgrounds, padding, and the one-colour ink live in `tools/generate/brand/src/config.ts`.
 
 ## Generation
 
@@ -31,6 +50,6 @@ Preparation fingerprints the artwork, generator code/settings, lockfile and runt
 
 ## Review
 
-Use the **Brand/Mark** Storybook stories for main, micro, dark, and monochrome appearances. `tests/e2e/brand/icons.spec.ts` checks the browser assets, app theme selection, and the main mark's visual baseline. Review intentional changes before updating its snapshot. Run at actual 16/24/32 pixel sizes as well as large sizes.
+Use the **Brand/Mark** Storybook stories for the colour, micro, and one-colour appearances. `tests/e2e/brand/icons.spec.ts` checks the browser assets, app theme selection, and the main mark's visual baseline. Review intentional changes before updating its snapshot. Run at actual 16/24/32 pixel sizes as well as large sizes.
 
 Do not mechanically replace generic pencil/tool icons or historical screenshots. Social artwork, external profile avatars, and Apple Icon Composer layered icons are separate design/export tasks.

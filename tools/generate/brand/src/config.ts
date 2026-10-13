@@ -6,23 +6,19 @@ export const repositoryRoot = await resolveWorkspaceRoot(fileURLToPath(import.me
 export const targets = ['web', 'docs', 'desktop'] as const
 export type BrandTarget = (typeof targets)[number]
 
+/**
+ * Logo kit v3: the colour mark sits bare on white and on black, the one-colour mark is ink or
+ * white, and the white tile holds the mark at 76% of its height, as the kit's app icon does.
+ */
 export const brand = {
-  background: '#F5F5EF',
-  darkBackground: '#202B2D',
-  darkPalette: {
-    body: '#55BAAC',
-    upper: '#258E83',
-    middle: '#86D5C6',
-    lower: '#45AFA0',
-    point: '#29978A',
-    handle: '#438CFF',
-    'handle-surface': '#F4FBFA'
-  },
-  darkGridOpacity: 0.6,
+  background: '#FFFFFF',
+  ink: '#111111',
   tileInset: 64,
-  tileRadius: 200,
-  appScale: 0.82,
-  tileScale: 0.88,
+  tileRadius: 224,
+  appScale: 0.762,
+  tileScale: 0.762,
+  // The desktop tile is inset, so the mark keeps the same share of the tile's height.
+  desktopScale: 0.667,
   maskableScale: 0.66
 } as const
 
