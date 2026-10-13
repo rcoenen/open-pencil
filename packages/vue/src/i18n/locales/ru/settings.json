@@ -94,5 +94,6 @@
   "serviceSetupFilesOnly": "Только файлы",
   "serviceSetupPartial": "{done} из {total}",
   "serviceSetupAllDone": "Всё настроено",
-  "serviceSetupComeBack": "Сюда всегда можно вернуться через Настройки → Настройка сервисов, так что смело продолжайте, например с тура."
+  "serviceSetupComeBack": "Сюда всегда можно вернуться через Настройки → Настройка сервисов, так что смело продолжайте, например с тура.",
+  "serviceSetupSeeAll": "Все сервисы"
 }

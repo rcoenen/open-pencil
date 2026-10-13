@@ -94,5 +94,6 @@
   "serviceSetupFilesOnly": "仅文件",
   "serviceSetupPartial": "{done}/{total}",
   "serviceSetupAllDone": "全部已设置",
-  "serviceSetupComeBack": "你随时可以在“设置 → 服务设置”中回到这里，所以请放心继续，例如先看看导览。"
+  "serviceSetupComeBack": "你随时可以在“设置 → 服务设置”中回到这里，所以请放心继续，例如先看看导览。",
+  "serviceSetupSeeAll": "查看所有服务"
 }

@@ -63,6 +63,7 @@ export const settingsMessageDefaults = {
   serviceSetupFilesOnly: 'Files only',
   serviceSetupPartial: params('{done} of {total}'),
   serviceSetupAllDone: 'Everything is set up',
+  serviceSetupSeeAll: 'See all services',
   serviceSetupComeBack:
     'You can always come back to this in Settings → Service setup, so feel free to carry on, for example with the tour.',
   serviceSetupSetUp: 'Set up',

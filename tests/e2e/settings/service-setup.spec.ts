@@ -10,7 +10,12 @@ test('the welcome lists what is left to set up, one row per group', async ({ pag
   await new CanvasHelper(page).waitForInit()
   const setup = page.getByTestId('ai-setup-dialog')
   const summary = setup.getByTestId('service-setup-summary')
-  await expect(summary.getByRole('heading', { name: 'Service setup' })).toBeVisible()
+  await expect(summary.getByRole('heading', { name: /Service setup/ })).toBeVisible()
+  // Collapsed to its count until opened.
+  const toggle = summary.getByRole('button', { name: /Service setup/ })
+  await expect(toggle).toHaveAttribute('aria-expanded', 'false')
+  await expect(summary.locator('[data-service-group]')).toHaveCount(0)
+  await toggle.click()
   await expect(summary).toContainText('OpenPencil works without these services.')
 
   const ai = summary.locator('[data-service-group="ai"]')
@@ -28,11 +33,12 @@ test('the welcome lists what is left to set up, one row per group', async ({ pag
   await expect(page.getByTestId('settings-storage-panel')).toBeVisible()
 })
 
-test('the overall count opens the full checklist in Settings', async ({ page }) => {
+test('See all services opens the full checklist in Settings', async ({ page }) => {
   await page.goto('/')
   await new CanvasHelper(page).waitForInit()
   const setup = page.getByTestId('ai-setup-dialog')
-  await setup.getByRole('button', { name: /of \d+ set up/ }).click()
+  await setup.getByRole('button', { name: /Service setup/ }).click()
+  await setup.getByRole('button', { name: /See all services/ }).click()
   await expect(setup).toHaveCount(0)
   const panel = page.getByTestId('settings-service-setup-panel')
   await expect(panel).toBeVisible()

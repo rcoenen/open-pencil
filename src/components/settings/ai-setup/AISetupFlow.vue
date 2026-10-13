@@ -101,6 +101,11 @@ async function finish(): Promise<void> {
     :description="header.description"
     :close-label="common.close"
   >
+    <!-- The welcome is OpenPencil's front door, so it shows the lockup; the title stays for screen readers. -->
+    <template v-if="phase === 'welcome'" #title>
+      <span class="sr-only">{{ header.heading }}</span>
+      <icon-brand-lockup aria-hidden="true" class="mb-1 block h-7 w-auto text-surface" />
+    </template>
     <template #actions>
       <AppButton v-if="phase === 'wizard'" size="xs" class="mr-1 ml-auto" @click="emit('advanced')">
         {{ ai.aiSetupAdvanced }}

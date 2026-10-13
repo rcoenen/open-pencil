@@ -94,5 +94,6 @@
   "serviceSetupFilesOnly": "Nur Dateien",
   "serviceSetupPartial": "{done} von {total}",
   "serviceSetupAllDone": "Alles ist eingerichtet",
-  "serviceSetupComeBack": "Du kannst jederzeit unter Einstellungen → Dienst-Einrichtung hierher zurückkehren. Mach also ruhig weiter, zum Beispiel mit dem Rundgang."
+  "serviceSetupComeBack": "Du kannst jederzeit unter Einstellungen → Dienst-Einrichtung hierher zurückkehren. Mach also ruhig weiter, zum Beispiel mit dem Rundgang.",
+  "serviceSetupSeeAll": "Alle Dienste ansehen"
 }

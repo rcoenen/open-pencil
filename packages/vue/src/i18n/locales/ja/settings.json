@@ -94,5 +94,6 @@
   "serviceSetupFilesOnly": "ファイルのみ",
   "serviceSetupPartial": "{total} 件中 {done} 件",
   "serviceSetupAllDone": "すべて設定済み",
-  "serviceSetupComeBack": "設定 → サービスの設定からいつでもここに戻れます。ツアーなど、このまま先へ進んでかまいません。"
+  "serviceSetupComeBack": "設定 → サービスの設定からいつでもここに戻れます。ツアーなど、このまま先へ進んでかまいません。",
+  "serviceSetupSeeAll": "すべてのサービスを表示"
 }

@@ -94,5 +94,6 @@
   "serviceSetupFilesOnly": "Tylko pliki",
   "serviceSetupPartial": "{done} z {total}",
   "serviceSetupAllDone": "Wszystko skonfigurowane",
-  "serviceSetupComeBack": "Zawsze możesz tu wrócić w Ustawienia → Konfiguracja usług, więc śmiało kontynuuj, na przykład z przewodnikiem."
+  "serviceSetupComeBack": "Zawsze możesz tu wrócić w Ustawienia → Konfiguracja usług, więc śmiało kontynuuj, na przykład z przewodnikiem.",
+  "serviceSetupSeeAll": "Zobacz wszystkie usługi"
 }
