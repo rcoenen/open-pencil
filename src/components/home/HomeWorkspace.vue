@@ -210,6 +210,11 @@ function formattedDate(updatedAt: string): string {
     <section
       class="mx-auto flex w-full max-w-7xl flex-col pt-4 pr-[max(1rem,env(safe-area-inset-right))] pb-4 pl-[max(1rem,env(safe-area-inset-left))] sm:px-6 sm:py-5"
     >
+      <icon-brand-lockup
+        role="img"
+        aria-label="OpenPencil"
+        class="mb-5 block h-8 w-auto text-surface"
+      />
       <HomeSearchActions v-model="query" @new-document="emit('new-document')" />
 
       <p v-if="openError" class="mb-4 text-xs text-danger" role="alert">{{ openError }}</p>
