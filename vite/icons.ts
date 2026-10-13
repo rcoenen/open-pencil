@@ -16,7 +16,7 @@ export function aiIconCollection() {
 
 /**
  * OpenPencil's own single-color marks from `assets/brand/icons`, used as
- * `<icon-brand-mark-outline />`. They draw with `currentColor`, so they follow the text color.
+ * `<icon-brand-mark-modular />`. They draw with `currentColor`, so they follow the text color.
  */
 export function brandIconCollection() {
   return FileSystemIconLoader(fileURLToPath(new URL('../assets/brand/icons', import.meta.url)))

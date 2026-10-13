@@ -9,7 +9,7 @@ for (const deviceScaleFactor of [1, 2]) {
       await page.goto('/?test')
       await new CanvasHelper(page).waitForInit()
       // The browser shows the mark as an outline at the top of the navigation rail, as Figma does;
-      // the ivory tile stays for the app icon, the favicon, and the desktop header.
+      // the white tile stays for the app icon, the favicon, and the desktop header.
       const button = page.getByRole('button', { name: 'Main menu', exact: true })
       const mark = button.locator('svg')
       await expect(mark).toHaveCount(1)

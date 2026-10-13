@@ -34,7 +34,7 @@ const railStyles = tv(navigationRailTheme)({ mark: true })
   />
   <DropdownMenuRoot v-else>
     <DropdownMenuTrigger :aria-label="t.mainMenu" :class="railStyles.item()">
-      <icon-brand-mark-outline :class="railStyles.icon()" />
+      <icon-brand-mark-modular :class="railStyles.icon()" />
     </DropdownMenuTrigger>
     <DropdownMenuPortal>
       <!-- Focus stays where the chosen action put it, such as a dialog it opened. -->
