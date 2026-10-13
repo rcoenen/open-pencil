@@ -22,7 +22,9 @@ Each row is a dark-to-light pair, the hue walks from blue to teal down the mark,
 
 The colour mark sits bare on white, black, and neutral greys, so the dark variants keep its colours. On colour or busy backgrounds, use the white tile or the one-colour mark, and never place the bare colour mark on one of its module colours. The one-colour mark is ink on light backgrounds and white on dark ones.
 
-The app icon is the colour mark on a white rounded tile, holding the mark at 76% of the tile's height. The same tile is the favicon in both browser themes, the any-purpose PWA icon, the profile image, and the editor header's 24px mark. Native desktop icons keep their platform-specific outer margin with the mark at the same share of the tile. Apple Touch keeps an opaque square for platform rounding; maskable artwork stays opaque and inside the central 80%-diameter safe circle.
+The app icon is the colour mark on a white rounded tile, holding the mark at 76% of the tile's height. The same tile is the favicon in both browser themes, the any-purpose PWA icon, and the profile image. Native desktop icons keep their platform-specific outer margin with the mark at the same share of the tile. Apple Touch keeps an opaque square for platform rounding; maskable artwork stays opaque and inside the central 80%-diameter safe circle.
+
+`icons/mark-modular.svg` is the kit's modular outline: the P and the lines between its modules, drawn with `currentColor` on a 24px grid with a 1.5px line. The editor header shows it in the text color; Vite serves `icons/` as the `brand` icon collection (`<icon-brand-mark-modular />`). The kit recommends it from 48px and its single-line UI icon below that.
 
 Minimum sizes: the colour mark 24px tall; the one-colour mark 16px. Keep half a module, a quarter of the mark's width, clear on every side.
 

@@ -13,7 +13,7 @@
 
 ### Changed
 
-- New logo (kit v3): a P built from five flat-colour modules, blue, azure, teal, mint, and a coral pencil foot. The app icon, favicons, PWA and desktop icons, and the editor's header mark use it on a white tile; the one-colour mark is ink or white.
+- New logo (kit v3): a P built from five flat-colour modules, blue, azure, teal, mint, and a coral pencil foot. The app icon, favicons, and PWA and desktop icons use it on a white tile, the one-colour mark is ink or white, and the editor header shows the kit's modular outline in the text color.
 - Trackpads and mouse wheels pan and zoom the canvas as in Figma. A two-finger pan moves the canvas twice as far, up to 120 px per scroll event. A pinch zooms as far in the desktop app and Safari as in other browsers, where it zooms a little less than before. In the desktop app and Safari, a pinch over Preview's live controls or comment pins now zooms the canvas, where it did nothing. On Windows each mouse wheel notch pans 16 px instead of 100 px, and notches less than 50 ms apart pan up to 120 px each.
 
 ### Fixed

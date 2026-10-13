@@ -36,8 +36,6 @@ import {
   updateMenuChecked
 } from '@/app/shell/menu/entry'
 import { appMenuShortcutLabel } from '@/app/shell/menu/shortcut'
-import { resolvedAppTheme } from '@/app/shell/theme'
-import BrandMark from '@/components/brand/BrandMark.vue'
 import { useScrollOverflow } from '@/components/shell/useScrollOverflow'
 import IconButton from '@/components/ui/button/IconButton.vue'
 import AppShortcutText from '@/components/ui/menu/AppShortcutText.vue'
@@ -68,11 +66,12 @@ const { overflowStart, overflowEnd, scrollTowardHidden } = useScrollOverflow(men
 <template>
   <div class="shrink-0 border-b border-border">
     <div class="flex items-center gap-2 px-2 py-1.5">
-      <BrandMark
+      <!-- The kit's modular outline in the text color, so the header mark reads as part of the UI. -->
+      <icon-brand-mark-modular
         data-test-id="app-logo"
-        variant="app-icon"
-        :appearance="resolvedAppTheme"
-        class="size-6"
+        role="img"
+        aria-label="OpenPencil"
+        class="size-6 shrink-0 text-surface"
       />
       <input
         v-if="editingName"
