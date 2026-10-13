@@ -7,12 +7,14 @@ export const targets = ['web', 'docs', 'desktop'] as const
 export type BrandTarget = (typeof targets)[number]
 
 /**
- * Logo kit v3: the colour mark sits bare on white and on black, the one-colour mark is ink or
- * white, and the white tile holds the mark at 76% of its height, as the kit's app icon does.
+ * Logo kit v5: the colour mark sits bare on white, black, and neutral greys, the one-colour mark
+ * is ink or paper, and the ink tile holds the mark at 76% of its height, as the kit's app icon does.
  */
 export const brand = {
-  background: '#FFFFFF',
+  // The app icon and favicon tile.
+  background: '#111111',
   ink: '#111111',
+  paper: '#FFFFFF',
   tileInset: 64,
   tileRadius: 224,
   appScale: 0.762,

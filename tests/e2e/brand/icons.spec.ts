@@ -9,7 +9,7 @@ for (const deviceScaleFactor of [1, 2]) {
       await page.goto('/?test')
       await new CanvasHelper(page).waitForInit()
       // The browser shows the mark as an outline at the top of the navigation rail, as Figma does;
-      // the white tile stays for the app icon, the favicon, and the desktop header.
+      // the ink tile stays for the app icon, the favicon, and the desktop header.
       const button = page.getByRole('button', { name: 'Main menu', exact: true })
       const mark = button.locator('svg')
       await expect(mark).toHaveCount(1)
@@ -35,7 +35,7 @@ for (const deviceScaleFactor of [1, 2]) {
       }
     })
 
-    test('the 16px favicon keeps its edge-to-edge white tile in both browser themes', async ({
+    test('the 16px favicon keeps its edge-to-edge ink tile in both browser themes', async ({
       page,
       baseURL
     }) => {
@@ -76,7 +76,7 @@ test('the larger dark SVG keeps the colour mark on a dark surface', async ({ pag
   await expect(mark).toHaveScreenshot('brand-mark-dark.png')
 })
 
-test('the white app tile works on light and dark surfaces', async ({ page }) => {
+test('the ink app tile works on light and dark surfaces', async ({ page }) => {
   await page.goto('/brand/app-icon.svg')
   const icon = page.locator('svg').first()
   for (const appearance of ['light', 'dark'] as const) {

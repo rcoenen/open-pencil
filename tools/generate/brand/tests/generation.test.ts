@@ -34,15 +34,14 @@ describe('brand generation', () => {
     expect(micro.length).toBe(16 * 16 * 4)
   })
 
-  test('keeps the five module colours in both themes', async () => {
+  test('keeps the three piece colours in both themes', async () => {
     for (const suffix of ['', '-dark']) {
       const pixels = await sharp(file(`brand/mark${suffix}.svg`)).ensureAlpha().raw().toBuffer()
       for (const [x, y, hex] of [
-        [68, 26, '1d46d6'],
-        [188, 26, '4da3ff'],
-        [68, 145, '0b8a84'],
-        [179, 145, '3edbb0'],
-        [85, 213, 'ff6b3d']
+        [68, 26, 'f5501e'],
+        [68, 145, 'f5501e'],
+        [179, 85, 'ffd43b'],
+        [85, 213, '9b5cff']
       ] as const) {
         const offset = (y * 256 + x) * 4
         expect(pixels.subarray(offset, offset + 4).toString('hex')).toBe(`${hex}ff`)
@@ -72,7 +71,7 @@ describe('brand generation', () => {
     }
   })
 
-  test('shares the white rounded tile across profile and any-purpose PWA assets', async () => {
+  test('shares the ink rounded tile across profile and any-purpose PWA assets', async () => {
     for (const [name, size] of [
       ['brand/app-icon-1024.png', 1024],
       ['brand/favicon-96x96.png', 96],
@@ -85,7 +84,7 @@ describe('brand generation', () => {
         .toBuffer({ resolveWithObject: true })
       expect([info.width, info.height]).toEqual([size, size])
       expect(data[3]).toBe(0)
-      // No desktop-style inset: the white reaches the midpoint of each edge.
+      // No desktop-style inset: the ink reaches the midpoint of each edge.
       for (const [x, y] of [
         [size / 2, 0],
         [0, size / 2],
@@ -93,10 +92,10 @@ describe('brand generation', () => {
         [size / 2, size - 1]
       ]) {
         const edge = (y * size + x) * 4
-        expect([...data.subarray(edge, edge + 4)]).toEqual([255, 255, 255, 255])
+        expect([...data.subarray(edge, edge + 4)]).toEqual([17, 17, 17, 255])
       }
       const offset = (Math.round((size * 80) / 1024) * size + size / 2) * 4
-      expect([...data.subarray(offset, offset + 4)]).toEqual([255, 255, 255, 255])
+      expect([...data.subarray(offset, offset + 4)]).toEqual([17, 17, 17, 255])
     }
     const svg = await sharp(file('brand/app-icon.svg')).ensureAlpha().raw().toBuffer()
     const png = await sharp(file('brand/app-icon-1024.png')).ensureAlpha().raw().toBuffer()

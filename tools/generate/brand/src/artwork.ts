@@ -21,11 +21,11 @@ export function recolor(
 ) {
   // The colour mark keeps its colours on dark backgrounds.
   if (mode === 'dark') return source
-  // One colour: the single silhouette, since abutting modules of one colour would show seams.
+  // One colour: the single silhouette, since abutting pieces of one colour would show seams.
   const svg = stringToSVG(source, adapter)
   for (const path of svg.find('[data-part]')) path.remove()
   for (const path of svg.find('[data-shape="silhouette"]')) {
-    path.fill(mode === 'mono' ? brand.ink : brand.background)
+    path.fill(mode === 'mono' ? brand.ink : brand.paper)
   }
   return svg.svg()
 }

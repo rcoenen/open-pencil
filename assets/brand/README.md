@@ -1,34 +1,32 @@
 # OpenPencil brand sources
 
-Logo kit v3: a P built from five modules on a 2 × 3 grid of equal square cells, in flat colour.
+Logo kit v5 (published at https://github.com/rcoenen/openpencil-logo-kit): a P built from three primitives on a 2 × 3 grid of equal square cells, in flat colour.
 
-- `mark.svg` is the colour mark. Every rounded corner uses the same radius, half a cell. The counter is a cut-out with one sharp corner, centred where the four top modules meet. The coral foot is the pencil.
+- `mark.svg` is the colour mark: a square stem, a half-disc bowl, and a rounded-square foot, the pencil. Rounded corners are half a cell. The counter is a circle of 0.4 cell with one sharp corner, centred on the seam so it locks stem and bowl together; its sharp corner points down-left, toward the foot.
 - `mark-micro.svg` is the same artwork at 16px, for favicons. The kit has no separate small drawing: below 24px it prefers the one-colour mark, which the generator derives.
 - Both draw the 200 × 300 mark centred on a square `0 0 300 300` canvas, so the generator can place them like any square artwork. Keep the two files' geometry identical.
-- Each module carries a `data-part` (`stem-top`, `bowl-top`, `stem-middle`, `bowl-bottom`, `foot`). The hidden `data-shape="silhouette"` path is the whole P as one shape: the one-colour variants draw it in place of the modules, whose shared edges would otherwise show seams.
+- Each piece carries a `data-part` (`stem`, `bowl`, `foot`). The hidden `data-shape="silhouette"` path is the whole P as one shape: the one-colour variants draw it in place of the pieces, whose shared edges would otherwise show seams.
 
-| Module       | `data-part`   | Name  | Hex       |
-| ------------ | ------------- | ----- | --------- |
-| Top left     | `stem-top`    | Blue  | `#1D46D6` |
-| Top right    | `bowl-top`    | Azure | `#4DA3FF` |
-| Middle left  | `stem-middle` | Teal  | `#0B8A84` |
-| Middle right | `bowl-bottom` | Mint  | `#3EDBB0` |
-| Foot         | `foot`        | Coral | `#FF6B3D` |
-| One colour   | —             | Ink   | `#111111` |
+| Piece | `data-part` | Name  | Hex       |
+| ----- | ----------- | ----- | --------- |
+| Stem  | `stem`      | Flame | `#F5501E` |
+| Bowl  | `bowl`      | Sun   | `#FFD43B` |
+| Foot  | `foot`      | Dusk  | `#9B5CFF` |
+| One colour | —      | Ink   | `#111111` |
 
-Each row is a dark-to-light pair, the hue walks from blue to teal down the mark, and coral is the only warm colour. Flat colour only: no gradients, shadows, or outlines on the colour mark.
+A sunset read top to bottom: flame stem, sun bowl, dusk foot. Flat colour only: no gradients, shadows, or outlines on the colour mark.
 
 ## Backgrounds and tiles
 
-The colour mark sits bare on white, black, and neutral greys, so the dark variants keep its colours. On colour or busy backgrounds, use the white tile or the one-colour mark, and never place the bare colour mark on one of its module colours. The one-colour mark is ink on light backgrounds and white on dark ones.
+The colour mark sits bare on white, black, and neutral greys, including the dark UI grey `#2C2C2C`, so the dark variants keep its colours. On colour or busy backgrounds, use a tile or the one-colour mark, and never place the bare colour mark on flame, sun, or dusk. The one-colour mark is ink on light backgrounds and white on dark ones.
 
-The app icon is the colour mark on a white rounded tile, holding the mark at 76% of the tile's height. The same tile is the favicon in both browser themes, the any-purpose PWA icon, the profile image, and the desktop app's 24px rail mark. Native desktop icons keep their platform-specific outer margin with the mark at the same share of the tile. Apple Touch keeps an opaque square for platform rounding; maskable artwork stays opaque and inside the central 80%-diameter safe circle.
+The app icon is the colour mark on the ink (`#111111`) rounded tile, holding the mark at 76% of the tile's height; it reads on light and dark tabs alike. The same tile is the favicon in both browser themes, the any-purpose PWA icon, the profile image, and the desktop app's 24px rail mark. Native desktop icons keep their platform-specific outer margin with the mark at the same share of the tile. Apple Touch keeps an opaque square for platform rounding; maskable artwork stays opaque and inside the central 80%-diameter safe circle.
 
-`icons/mark-modular.svg` is the kit's modular outline: the P and the lines between its modules, drawn with `currentColor` on a 24px grid with a 1.5px line. The browser's main-menu button at the top of the navigation rail shows it in the text color, as Figma shows its logo; Vite serves `icons/` as the `brand` icon collection (`<icon-brand-mark-modular />`). The kit recommends it from 48px and its single-line UI icon below that.
+`icons/mark-modular.svg` is the kit's modular outline: the P and the lines between its pieces, drawn with `currentColor` on a 24px grid with a 1.5px line. The browser's main-menu button at the top of the navigation rail shows it in the text color, as Figma shows its logo; Vite serves `icons/` as the `brand` icon collection (`<icon-brand-mark-modular />`). The kit recommends it from 48px and its single-line UI icon below that.
 
-Minimum sizes: the colour mark 24px tall; the one-colour mark 16px. Keep half a module, a quarter of the mark's width, clear on every side.
+Minimum sizes: the colour mark 24px tall; the one-colour mark 16px. Keep half a cell, a quarter of the mark's width, clear on every side.
 
-Edit these SVGs, not generated files. Platform backgrounds, padding, and the one-colour ink live in `tools/generate/brand/src/config.ts`.
+Edit these SVGs, not generated files. The tile colour, the one-colour ink and paper, and platform padding live in `tools/generate/brand/src/config.ts`.
 
 ## Generation
 

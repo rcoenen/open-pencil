@@ -1,11 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 300 300">
   <g transform="translate(50 0)">
-    <!-- The one-colour mark: drawn by the mono variants in place of the modules, which would leave seams. -->
-    <path data-shape="silhouette" fill="none" fill-rule="evenodd" d="M50 0H150A50 50 0 0 1 200 50V150A50 50 0 0 1 150 200H100V300H50A50 50 0 0 1 0 250V50A50 50 0 0 1 50 0ZM60 100A40 40 0 1 1 100 140H60Z"/>
-    <path data-part="stem-top" fill="#1D46D6" d="M50 0H100V60A40 40 0 0 0 60 100H0V50A50 50 0 0 1 50 0Z"/>
-    <path data-part="bowl-top" fill="#4DA3FF" d="M100 0H150A50 50 0 0 1 200 50V100H140A40 40 0 0 0 100 60Z"/>
-    <path data-part="stem-middle" fill="#0B8A84" d="M0 100H60V140H100V200H0Z"/>
-    <path data-part="bowl-bottom" fill="#3EDBB0" d="M200 100V150A50 50 0 0 1 150 200H100V140A40 40 0 0 0 140 100Z"/>
-    <path data-part="foot" fill="#FF6B3D" d="M0 200H100V300H50A50 50 0 0 1 0 250Z"/>
+    <!-- The one-colour mark: drawn by the mono variants in place of the pieces, which would leave seams. -->
+    <path data-shape="silhouette" fill="none" fill-rule="evenodd" d="M50 0H100A100 100 0 0 1 100 200V300H50A50 50 0 0 1 0 250V50A50 50 0 0 1 50 0ZM60 100A40 40 0 1 1 100 140H60Z"/>
+    <path data-part="stem" fill="#F5501E" d="M50 0H100V60A40 40 0 0 0 60 100V140H100V200H0V50A50 50 0 0 1 50 0Z"/>
+    <path data-part="bowl" fill="#FFD43B" d="M100 0A100 100 0 0 1 100 200V140A40 40 0 0 0 100 60Z"/>
+    <path data-part="foot" fill="#9B5CFF" d="M0 200H100V300H50A50 50 0 0 1 0 250Z"/>
   </g>
 </svg>
