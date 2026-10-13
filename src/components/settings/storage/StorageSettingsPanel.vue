@@ -14,7 +14,8 @@ import { useStorageSettingsFeedback } from '@/app/integrations/storage/settings/
 import { useStorageSettings } from '@/app/integrations/storage/settings/use'
 import { settingsDialogOpen } from '@/app/settings/dialog'
 import { useSettingsFormGuard } from '@/app/settings/navigation/use'
-import { openStorageWorkspace } from '@/app/shell/menu/navigation'
+import { openHome } from '@/app/shell/menu/navigation'
+import ConfiguredStatusIcon from '@/components/settings/layout/ConfiguredStatusIcon.vue'
 import { focusInvalidField } from '@/components/settings/layout/focus'
 import SettingsPage from '@/components/settings/layout/SettingsPage.vue'
 import SettingsSaveFeedback from '@/components/settings/layout/SettingsSaveFeedback.vue'
@@ -84,7 +85,7 @@ async function save() {
 }
 function openWorkspace() {
   settingsDialogOpen.value = false
-  openStorageWorkspace(router)
+  openHome(router)
 }
 async function testConnection() {
   if (busy.value) return
@@ -113,6 +114,7 @@ async function testConnection() {
           <template #title>{{ settings.storage }}</template>
           <template #description>{{ provider.description }}</template>
           <AppActionRow @click="edit">
+            <template #leading><ConfiguredStatusIcon :configured="configured" /></template>
             {{ provider.label }}
             <template #description>{{
               configured ? settings.configured : settings.notConfigured
@@ -133,7 +135,10 @@ async function testConnection() {
             {{ settings.configureStorageHint }}
           </p>
         </SettingsSection>
-        <CloudWaitlistSection />
+        <!-- OpenPencil Cloud is a separate offer from the storage set up above. -->
+        <div class="border-t border-border pt-6">
+          <CloudWaitlistSection />
+        </div>
       </div>
       <SettingsSection v-else>
         <template #title>{{ settings.storage }}</template>

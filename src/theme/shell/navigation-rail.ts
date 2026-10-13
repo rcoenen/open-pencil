@@ -8,8 +8,7 @@ const navigationRailTheme = {
     root: 'flex w-12 shrink-0 flex-col items-center gap-1 border-r border-border py-2',
     item: 'flex size-8 shrink-0 cursor-pointer items-center justify-center rounded-[5px] text-muted outline-none hover:bg-hover hover:text-surface focus-visible:ring-2 focus-visible:ring-accent/40 data-[state=open]:bg-panel-selected-muted data-[state=open]:text-primary',
     icon: 'size-4',
-    separator: 'my-1 h-px w-6 shrink-0 bg-border',
-    spacer: 'flex-1'
+    separator: 'my-1 h-px w-6 shrink-0 bg-border'
   },
   variants: {
     active: {

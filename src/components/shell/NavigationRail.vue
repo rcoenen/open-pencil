@@ -6,17 +6,16 @@ import IconShapes from '~icons/lucide/shapes'
 
 import { useI18n } from '@open-pencil/vue'
 
-import { openSettingsDialog } from '@/app/settings/dialog'
 import MainMenuButton from '@/components/shell/MainMenuButton.vue'
 import Tip from '@/components/ui/overlay/Tip.vue'
 import navigationRailTheme from '@/theme/shell/navigation-rail'
 
 export type LeftPanelView = 'file' | 'assets'
 
-/** Figma's navigation bar: the main menu, the left panel's views, and Settings at the foot. */
+/** Figma's navigation bar: the main menu and the left panel's views. Settings is in the main menu. */
 const view = defineModel<LeftPanelView>({ required: true })
 
-const { menu, panels, settings } = useI18n()
+const { menu, panels } = useI18n()
 const railStyles = tv(navigationRailTheme)
 // While the main menu is open its button is the blue one, so the active view stands by.
 const menuOpen = ref(false)
@@ -57,18 +56,6 @@ const views = computed(() => [
         @click="view = item.value"
       >
         <component :is="item.icon" :class="base.icon()" />
-      </button>
-    </Tip>
-    <div :class="base.spacer()" />
-    <Tip as-child :label="settings.title" side="right">
-      <button
-        type="button"
-        data-test-id="app-settings-trigger"
-        :aria-label="settings.title"
-        :class="base.item()"
-        @click="openSettingsDialog()"
-      >
-        <icon-lucide-settings :class="base.icon()" />
       </button>
     </Tip>
   </nav>
