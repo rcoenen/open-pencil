@@ -22,6 +22,7 @@ const { menu: t } = useI18n()
 const { mainMenu } = useAppMenu()
 const mainMenuCls = useMenuUI({ content: 'min-w-52' })
 const railStyles = tv(navigationRailTheme)({ mark: true })
+const open = defineModel<boolean>('open', { default: false })
 </script>
 
 <template>
@@ -32,7 +33,7 @@ const railStyles = tv(navigationRailTheme)({ mark: true })
     :appearance="resolvedAppTheme"
     class="size-6"
   />
-  <DropdownMenuRoot v-else>
+  <DropdownMenuRoot v-else v-model:open="open">
     <DropdownMenuTrigger :aria-label="t.mainMenu" :class="railStyles.item()">
       <icon-brand-mark-modular :class="railStyles.icon()" />
     </DropdownMenuTrigger>

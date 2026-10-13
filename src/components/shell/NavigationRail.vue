@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { tv } from 'tailwind-variants'
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import IconFile from '~icons/lucide/file'
 import IconShapes from '~icons/lucide/shapes'
 
@@ -18,6 +18,8 @@ const view = defineModel<LeftPanelView>({ required: true })
 
 const { menu, panels, settings } = useI18n()
 const railStyles = tv(navigationRailTheme)
+// While the main menu is open its button is the blue one, so the active view stands by.
+const menuOpen = ref(false)
 const base = railStyles()
 
 const views = computed(() => [
@@ -38,7 +40,7 @@ const views = computed(() => [
 
 <template>
   <nav :aria-label="menu.navigation" :class="base.root()">
-    <MainMenuButton />
+    <MainMenuButton v-model:open="menuOpen" />
     <div :class="base.separator()" />
     <Tip v-for="item in views" :key="item.value" as-child :label="item.label" side="right">
       <button
@@ -46,7 +48,12 @@ const views = computed(() => [
         :data-test-id="item.testId"
         :aria-label="item.label"
         :aria-pressed="view === item.value"
-        :class="railStyles({ active: view === item.value }).item()"
+        :class="
+          railStyles({
+            active: view === item.value && !menuOpen,
+            standby: view === item.value && menuOpen
+          }).item()
+        "
         @click="view = item.value"
       >
         <component :is="item.icon" :class="base.icon()" />

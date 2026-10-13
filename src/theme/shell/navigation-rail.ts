@@ -1,6 +1,7 @@
 /**
- * Figma's navigation bar: square buttons that show a light square on hover and turn blue while
- * their view is active or their menu is open.
+ * Figma's navigation bar: square buttons that show a light square on hover and turn blue for the
+ * active view or the open menu. One button is blue at a time: while the menu is open, the active
+ * view steps back to a white icon.
  */
 const navigationRailTheme = {
   slots: {
@@ -16,6 +17,10 @@ const navigationRailTheme = {
         item: 'bg-panel-selected-muted text-primary hover:bg-panel-selected-muted hover:text-primary'
       }
     },
+    // The active view while the main menu is open: still marked, but no longer blue.
+    standby: {
+      true: { item: 'text-surface' }
+    },
     // The main menu shows the mark at full strength, as Figma shows its logo in white.
     mark: {
       true: { item: 'text-surface', icon: 'size-6' }
@@ -23,6 +28,7 @@ const navigationRailTheme = {
   },
   defaultVariants: {
     active: false,
+    standby: false,
     mark: false
   }
 }
