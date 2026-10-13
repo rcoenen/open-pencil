@@ -68,9 +68,9 @@
   "baseURLHint": "必要なパスを含めて API エンドポイントを入力してください。",
   "designToolsRequired": "デザイン用モデルはツールに対応している必要があります。対応モデルを選ぶか、詳細設定でツール対応を有効にしてください。",
   "serviceSetup": "サービスの設定",
-  "serviceSetupDescription": "OpenPencil の接続先と、まだ設定が必要な項目です。",
+  "serviceSetupDescription": "OpenPencil はこれらのサービスがなくても使えます。設定すると、より多くの機能を活用できます。",
   "serviceSetupProgress": "{total} 件中 {done} 件設定済み",
-  "serviceSetupLocalOnly": "ローカルのみ: デザインは保存したファイルにのみ残ります",
+  "serviceSetupLocalOnly": "ファイルのみ: デザインは保存したファイルにのみ残ります",
   "serviceSetupSetUp": "設定する",
   "serviceSetupReview": "確認",
   "setupGroupAI": "AI",
@@ -90,5 +90,9 @@
   "setupMCPConnections": "外部 MCP 接続",
   "setupWebMCP": "WebMCP ブラウザーツール",
   "setupRememberKeys": "このデバイスにキーを保存",
-  "serviceSetupLocalOnlyShort": "ローカルのみ"
+  "serviceSetupNotSetUp": "未設定",
+  "serviceSetupFilesOnly": "ファイルのみ",
+  "serviceSetupPartial": "{total} 件中 {done} 件",
+  "serviceSetupAllDone": "すべて設定済み",
+  "serviceSetupComeBack": "設定 → サービスの設定からいつでもここに戻れます。ツアーなど、このまま先へ進んでかまいません。"
 }

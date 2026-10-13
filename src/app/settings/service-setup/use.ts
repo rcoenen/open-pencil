@@ -44,6 +44,8 @@ export interface ServiceSetupItem {
 
 export interface ServiceSetupGroup {
   id: ServiceSetupGroupID
+  /** Where the group's services are set up: the section of its first service. */
+  section: SettingsSection
   items: ServiceSetupItem[]
   done: number
   total: number
@@ -168,16 +170,26 @@ export function useServiceSetup() {
   })
 
   const groups = computed<ServiceSetupGroup[]>(() =>
-    GROUP_ORDER.map((id) => {
+    GROUP_ORDER.flatMap((id) => {
       const groupItems = items.value.filter((item) => item.group === id)
-      return {
-        id,
-        items: groupItems,
-        done: groupItems.filter((item) => item.status === 'done').length,
-        total: groupItems.length
-      }
-    }).filter((group) => group.total > 0)
+      const first = groupItems.at(0)
+      if (!first) return []
+      return [
+        {
+          id,
+          section: first.section,
+          items: groupItems,
+          done: groupItems.filter((item) => item.status === 'done').length,
+          total: groupItems.length
+        }
+      ]
+    })
   )
 
-  return { items, groups, refresh }
+  const totals = computed(() => ({
+    done: items.value.filter((item) => item.status === 'done').length,
+    total: items.value.length
+  }))
+
+  return { items, groups, totals, refresh }
 }

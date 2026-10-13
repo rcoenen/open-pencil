@@ -8,6 +8,7 @@ import { useI18n } from '@open-pencil/vue'
 import { type AISetupEntry, hideWelcomeOnLaunch } from '@/app/ai/models/settings/onboarding/dialog'
 import type { OnboardingAccess } from '@/app/ai/models/settings/onboarding/plan'
 import { AI_SETUP_STEPS, useAIOnboarding } from '@/app/ai/models/settings/onboarding/use'
+import type { SettingsSection } from '@/app/settings/dialog'
 import SettingsSaveFeedback from '@/components/settings/layout/SettingsSaveFeedback.vue'
 import ServiceSetupSummary from '@/components/settings/service-setup/ServiceSetupSummary.vue'
 import AppButton from '@/components/ui/button/AppButton.vue'
@@ -26,8 +27,13 @@ const { entry, agentsAvailable = IS_TAURI } = defineProps<{
   entry: AISetupEntry
   agentsAvailable?: boolean
 }>()
-const emit = defineEmits<{ close: []; advanced: []; tour: []; services: [] }>()
-const { ai, common, settings } = useI18n()
+const emit = defineEmits<{
+  close: []
+  advanced: []
+  tour: []
+  services: [section: SettingsSection]
+}>()
+const { ai, common } = useI18n()
 const styles = tv(theme)()
 
 const onboarding = useAIOnboarding({ agentsAvailable })
@@ -107,13 +113,7 @@ async function finish(): Promise<void> {
       <template v-if="phase === 'welcome'">
         <!-- What is set up so far, AI first; Set up AI in the footer starts with the first gap. -->
         <section :class="styles.services()" data-test-id="ai-setup-services">
-          <div>
-            <h3 :class="styles.introHeading()">{{ settings.serviceSetup }}</h3>
-            <ServiceSetupSummary :class="styles.introText()" />
-          </div>
-          <AppButton variant="outline" :class="styles.tourAction()" @click="emit('services')">
-            {{ settings.serviceSetupReview }}
-          </AppButton>
+          <ServiceSetupSummary @open="emit('services', $event)" />
         </section>
         <section :class="styles.tour()" data-test-id="ai-setup-tour">
           <div>

@@ -68,9 +68,9 @@
   "baseURLHint": "Введите адрес API, включая необходимый путь.",
   "designToolsRequired": "Модель для дизайна должна поддерживать инструменты. Выберите подходящую модель или включите поддержку инструментов в расширенных настройках.",
   "serviceSetup": "Настройка сервисов",
-  "serviceSetupDescription": "К чему подключён OpenPencil и что ещё нужно настроить.",
+  "serviceSetupDescription": "OpenPencil работает и без этих сервисов. Настройте их, чтобы использовать все возможности.",
   "serviceSetupProgress": "Настроено {done} из {total}",
-  "serviceSetupLocalOnly": "Только локально: дизайны остаются в сохранённых файлах",
+  "serviceSetupLocalOnly": "Только файлы: дизайны остаются в сохранённых файлах",
   "serviceSetupSetUp": "Настроить",
   "serviceSetupReview": "Проверить",
   "setupGroupAI": "ИИ",
@@ -90,5 +90,9 @@
   "setupMCPConnections": "Внешние подключения MCP",
   "setupWebMCP": "Инструменты браузера WebMCP",
   "setupRememberKeys": "Запоминать ключи на этом устройстве",
-  "serviceSetupLocalOnlyShort": "Только локально"
+  "serviceSetupNotSetUp": "Не настроено",
+  "serviceSetupFilesOnly": "Только файлы",
+  "serviceSetupPartial": "{done} из {total}",
+  "serviceSetupAllDone": "Всё настроено",
+  "serviceSetupComeBack": "Сюда всегда можно вернуться через Настройки → Настройка сервисов, так что смело продолжайте, например с тура."
 }

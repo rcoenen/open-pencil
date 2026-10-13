@@ -68,9 +68,9 @@
   "baseURLHint": "请输入 API 端点，包括所需的路径。",
   "designToolsRequired": "设计模型必须支持工具。请选择兼容的模型，或在高级设置中启用工具支持。",
   "serviceSetup": "服务设置",
-  "serviceSetupDescription": "OpenPencil 已连接的服务，以及尚待设置的项目。",
+  "serviceSetupDescription": "OpenPencil 无需这些服务也能使用。设置它们以充分发挥其功能。",
   "serviceSetupProgress": "已设置 {done}/{total}",
-  "serviceSetupLocalOnly": "仅本地：设计只保存在你保存的文件中",
+  "serviceSetupLocalOnly": "仅文件：设计只保存在你保存的文件中",
   "serviceSetupSetUp": "设置",
   "serviceSetupReview": "查看",
   "setupGroupAI": "AI",
@@ -90,5 +90,9 @@
   "setupMCPConnections": "外部 MCP 连接",
   "setupWebMCP": "WebMCP 浏览器工具",
   "setupRememberKeys": "在此设备上记住密钥",
-  "serviceSetupLocalOnlyShort": "仅本地"
+  "serviceSetupNotSetUp": "未设置",
+  "serviceSetupFilesOnly": "仅文件",
+  "serviceSetupPartial": "{done}/{total}",
+  "serviceSetupAllDone": "全部已设置",
+  "serviceSetupComeBack": "你随时可以在“设置 → 服务设置”中回到这里，所以请放心继续，例如先看看导览。"
 }

@@ -5,17 +5,34 @@ import { CanvasHelper } from '#tests/helpers/canvas'
 // A fresh install: nothing set up yet, and the welcome offered on launch.
 test.use({ storageState: { cookies: [], origins: [] } })
 
-test('the welcome sums up Service setup and Review opens the checklist', async ({ page }) => {
+test('the welcome lists what is left to set up, one row per group', async ({ page }) => {
   await page.goto('/')
   await new CanvasHelper(page).waitForInit()
   const setup = page.getByTestId('ai-setup-dialog')
-  const services = setup.getByTestId('ai-setup-services')
-  await expect(services.getByRole('heading', { name: 'Service setup' })).toBeVisible()
-  const summary = services.getByTestId('service-setup-summary')
-  await expect(summary.locator('[data-service-group="ai"]')).toContainText('AI0/2')
-  await expect(summary.locator('[data-service-group="storage"]')).toContainText('Local only')
+  const summary = setup.getByTestId('service-setup-summary')
+  await expect(summary.getByRole('heading', { name: 'Service setup' })).toBeVisible()
+  await expect(summary).toContainText('OpenPencil works without these services.')
 
-  await services.getByRole('button', { name: 'Review' }).click()
+  const ai = summary.locator('[data-service-group="ai"]')
+  await expect(ai).toHaveAttribute('data-state', 'none')
+  await expect(ai).toContainText('Not set up')
+  const storage = summary.locator('[data-service-group="storage"]')
+  await expect(storage).toHaveAttribute('data-state', 'files-only')
+  await expect(storage).toContainText('Files only')
+  // Groups with nothing left to do stay off the welcome.
+  await expect(summary.locator('[data-service-group="browser"]')).toHaveCount(0)
+
+  // A row opens the section that sets its services up.
+  await storage.getByRole('button').click()
+  await expect(setup).toHaveCount(0)
+  await expect(page.getByTestId('settings-storage-panel')).toBeVisible()
+})
+
+test('the overall count opens the full checklist in Settings', async ({ page }) => {
+  await page.goto('/')
+  await new CanvasHelper(page).waitForInit()
+  const setup = page.getByTestId('ai-setup-dialog')
+  await setup.getByRole('button', { name: /of \d+ set up/ }).click()
   await expect(setup).toHaveCount(0)
   const panel = page.getByTestId('settings-service-setup-panel')
   await expect(panel).toBeVisible()
@@ -24,11 +41,10 @@ test('the welcome sums up Service setup and Review opens the checklist', async (
   const design = panel.locator('[data-service="design-model"]')
   await expect(design).toHaveAttribute('data-status', 'todo')
   await expect(design).toContainText('Not configured')
-  const storage = panel.locator('[data-service="cloud-storage"]')
-  await expect(storage).toHaveAttribute('data-status', 'local-only')
+  await expect(panel.locator('[data-service="cloud-storage"]')).toHaveAttribute(
+    'data-status',
+    'local-only'
+  )
   // Review and Fast tasks are assignable but unused, so they are not on the list.
   await expect(panel.locator('[data-service="review-model"]')).toHaveCount(0)
-
-  await storage.click()
-  await expect(page.getByTestId('settings-storage-panel')).toBeVisible()
 })

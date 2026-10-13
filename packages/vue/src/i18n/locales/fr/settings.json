@@ -68,9 +68,9 @@
   "baseURLHint": "Saisissez le point d’accès de l’API, y compris le chemin requis.",
   "designToolsRequired": "Le modèle de conception doit prendre en charge les outils. Choisissez un modèle compatible ou activez les outils dans les paramètres avancés.",
   "serviceSetup": "Configuration des services",
-  "serviceSetupDescription": "Ce à quoi OpenPencil est connecté et ce qu’il reste à configurer.",
+  "serviceSetupDescription": "OpenPencil fonctionne sans ces services. Configurez-les pour en tirer le meilleur parti.",
   "serviceSetupProgress": "{done} sur {total} configurés",
-  "serviceSetupLocalOnly": "Local uniquement : les designs restent dans les fichiers que vous enregistrez",
+  "serviceSetupLocalOnly": "Fichiers uniquement : les designs restent dans les fichiers que vous enregistrez",
   "serviceSetupSetUp": "Configurer",
   "serviceSetupReview": "Vérifier",
   "setupGroupAI": "IA",
@@ -90,5 +90,9 @@
   "setupMCPConnections": "Connexions MCP externes",
   "setupWebMCP": "Outils de navigateur WebMCP",
   "setupRememberKeys": "Mémoriser les clés sur cet appareil",
-  "serviceSetupLocalOnlyShort": "Local uniquement"
+  "serviceSetupNotSetUp": "Non configuré",
+  "serviceSetupFilesOnly": "Fichiers uniquement",
+  "serviceSetupPartial": "{done} sur {total}",
+  "serviceSetupAllDone": "Tout est configuré",
+  "serviceSetupComeBack": "Vous pourrez toujours y revenir depuis Paramètres → Configuration des services : continuez donc, par exemple avec la visite."
 }
